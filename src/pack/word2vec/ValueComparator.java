@@ -5,16 +5,24 @@ import java.util.Map;
 
 class ValueComparator implements Comparator<String> {
     Map<String, Double> base;
+    boolean cos;
 
-    public ValueComparator(Map<String, Double> base) {
+    public ValueComparator(Map<String, Double> base, boolean cos) {
         this.base = base;
+        this.cos = cos;
     }
 
     public int compare(String a, String b) {
-        if (base.get(a) >= base.get(b)) {
-            return -1;
-        } else {
-            return 1;
-        }
+    		if(this.cos) {
+	        if (base.get(a) >= base.get(b)) return -1;
+	        else return 1;
+    		}
+    		else {//cos=false
+    			if (base.get(a) >= base.get(b)) return 1;
+    	        else return -1;
+    		}
     }
+    
+    
 } 
+

@@ -60,7 +60,7 @@ public class Utilityw2v {
 		return vecs;
 	}
 	
-	//sum les vecteurs du mot a, b et c, et retourne un nouveau vecteur
+	//sum les vecteurs du mot a+b+c, et retourne un nouveau vecteur
 	public static double[] addition(String a, String b, String c) {
 		double[] vecSum = new double[w2v.get(a).length];
 		if (w2v.containsKey(a) && w2v.containsKey(b) && w2v.containsKey(c)) {
@@ -74,7 +74,7 @@ public class Utilityw2v {
 	}
 	
 	
-	//pareil que addition
+	//pareil que addition; a-b, retourne vecteurs
 	public static double[] soustraction(String a, String b) {
 		double[] vecSoustra = new double[w2v.get(a).length];
 		if (w2v.containsKey(a) && w2v.containsKey(b)) {
@@ -85,9 +85,20 @@ public class Utilityw2v {
 		else if(!w2v.containsKey(a)) throw new IllegalArgumentException("Mot " + a + "n'existe pas dans w2v.");
 		else throw new IllegalArgumentException("Mot " + b + "n'existe pas dans w2v.");
 	}
+	
+	//a-b+c, retourne vecteurs
+	public static double[] sous_Add(String a, String b, String c) {
+		double[] newV = new double[w2v.get(a).length];
+		if (w2v.containsKey(a) && w2v.containsKey(b) && w2v.containsKey(c)) {
+			for (int i=0; i<w2v.get(a).length; i++)
+				newV[i] = w2v.get(a)[i] - w2v.get(b)[i] + w2v.get(c)[i];
+			return newV;
+		}
+		else throw new IllegalArgumentException("les mots n'existent pas dans w2v.");
+	}
 
 	
-	//methode qui prend 3 Strings et retourne un espace vectoriel du moyen de ces mots
+	//(a+b+c)/3, retourne vecteurs
 	public static double[] moyenne(String a, String b, String c) {
 		double[] sumVec = addition(a, b, c);
 		double[] newVec = new double[sumVec.length];
@@ -95,7 +106,15 @@ public class Utilityw2v {
 		return newVec;
 	}
 	
-	//multiplier deux espace vec et retourne un double score
+	//sum(a^2), retourne un double
+	public static double power2(double[] a) {
+		double result = 0.0;
+		for(int i=0;i<a.length;i++) result += Math.pow(a[i], 2);
+		return result;
+	}
+	
+	
+	//a*b : multiplier deux espace vec et retourne un double score
 	//l'argument motX est le moyen des 3 indices, a represent un mot dans w2v
 	public static double multiplication(double[] motX, double[] a) {
 		if(motX.length == a.length) { //verifier que les 2 espaces ont la meme taille
@@ -106,6 +125,7 @@ public class Utilityw2v {
 		else throw new IllegalArgumentException("Taille de vecteurs n'est pas egale.");
 	}
 	
+	
 	//calculer la norme d'un espace vec i.e: || b ||, retourne un double
 	public static double norme(double[] vecs) {
 		double somme = 0.0; double norme = 0.0;
@@ -113,6 +133,7 @@ public class Utilityw2v {
 		norme = Math.sqrt(somme);	
 		return norme;
 	}
+	
 	
 	//pre-calculer le norme pour tous les mots dans w2v
 	public static Map<String, Double> normeAll() {
@@ -124,6 +145,7 @@ public class Utilityw2v {
 		return norme_all;
 	}
 	
+	
 	//methode pour calculer le score cosinus entre 2 mots = multi(a, b) / norme(a)*norme(b)
 	public static double cosinus(double[] motX_vec, double[] a_vec) {
 		double numerateur = multiplication(motX_vec, a_vec);
@@ -131,13 +153,21 @@ public class Utilityw2v {
 		return numerateur / denominateur;
 	}
 	
-	//package toutes les methodes cosinus, prend 3 indices et un Map de scores normes pre-calcules comme argument
-	//retourne les 10 mots les plus similaires
-	public static ArrayList<String> top10mots(String a, String b, String c, Map<String, Double> normes) {
-		double[] moyenne_vec = moyenne(a, b, c);
-		HashMap<String, Double> scores_cos = new HashMap<>(); //creer un map pour stocker <mot, score_cos>
-		//calculer tous la similarite cosinus avec tous les mots dans w2v
-		for (String mot: w2v.keySet()) {
+	//dist euclidienne = sqrt(a^2 + b^2 - 2ab)
+	public static double euclidien(double[] motX_vec, double[] a_vec) {
+		double powX = power2(motX_vec);
+		double powA = power2(a_vec);
+		double multi = multiplication(motX_vec, a_vec);
+		return Math.sqrt(powA + powX - 2*multi);
+	}
+	
+	//package toutes les methodes cosinus, prend le moyenne ou sum des 3 indices et un Map de scores normes pre-calcules
+	//retourne les n mots les plus similaires
+	public static ArrayList<String> topNmots(double[] vecs, Map<String, Double> normes, int n, boolean cos) {
+		HashMap<String, Double> scores = new HashMap<>();	//stocker tous les mots et leur similarite avec l'argment vecs
+		TreeMap<String, Double> sorted_score;//stocker les mots tries
+		if (cos) {//cos=true
+			for(String mot: w2v.keySet()) {
 			/*
 			//possibilite 1, apeler directement cosinus
 			double a_score = cosinus(moyenne_vec, w2v.get(mot));
@@ -145,19 +175,27 @@ public class Utilityw2v {
 			*/
 			
 			//possi 2, prend les normes pre-calculees dans l'argument, evider de repeter les normes de chaque mot
-			double numerateur = multiplication(moyenne_vec, w2v.get(mot));
-			double denominateur = norme(moyenne_vec) * normes.get(mot);
+			double numerateur = multiplication(vecs, w2v.get(mot));
+			double denominateur = norme(vecs) * normes.get(mot);
 			Double a_score = (Double)(numerateur/denominateur); //boxing double a Double
-			scores_cos.put(mot, a_score);
-		}			
-		TreeMap<String, Double> sorted_score = trierMap(scores_cos); 
-		return nFirst(10, sorted_score); 
+			scores.put(mot, a_score);
+			}
+			sorted_score = trierMap(scores, cos); 
+		}
+		else {//cos=false, prendre dist euclidienne
+			for(String mot: w2v.keySet()) {
+				Double a_score = euclidien(vecs, w2v.get(mot));
+				scores.put(mot, a_score);	
+			}
+			sorted_score = trierMap(scores, cos); 
+		}	
+		return nFirst(n, sorted_score); 
 	}
 	
 	
 	//creer un nouveau TreeMap et trier les scores
-	public static TreeMap<String, Double> trierMap(HashMap<String, Double> untrier) {
-		ValueComparator vc = new ValueComparator(untrier); //redefinir methode compare dans la classe ValueComparator
+	public static TreeMap<String, Double> trierMap(HashMap<String, Double> untrier, boolean cos) {
+		ValueComparator vc = new ValueComparator(untrier, cos); //redefinir methode compare dans la classe ValueComparator
         TreeMap<String, Double> sorted_score = new TreeMap<String, Double>(vc);
         sorted_score.putAll(untrier);//copy tous les Entry de score cosinus dans sorted_w2v, il va trier selon la methode compare
         return sorted_score;
@@ -175,13 +213,7 @@ public class Utilityw2v {
 		  System.out.println(target);
 		  ArrayList<String> mots = new ArrayList<String>(target.keySet());
 		  return mots;
-	}
-	
-	
-//	public static double euclidien() {
-//		return a_score_euclidien;
-//	}
-	
+	}	
 	
 	
 	//methode pour choisir aleatoirement un mot et a faire deviner le joueur
