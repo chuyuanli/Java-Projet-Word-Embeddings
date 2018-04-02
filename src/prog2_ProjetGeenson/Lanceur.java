@@ -15,6 +15,7 @@ public class Lanceur {
 		
 	public static void main(String[] args) throws IOException, WordNotFoundException {
 		//PARTIE 1. TRAITER LES ARGUMENTS
+		System.out.println("\n------ Bienvenu au jeu Geenson -------\n");
 		String w2v = "/Users/lichuyuan/Desktop/JavaProjet/w2v_final";		
 		//arguments optionnels, les valeurs par default
 		int nbJoueur = 2;
@@ -57,8 +58,6 @@ public class Lanceur {
 			}
 			else if(arg[0].equals("deMagi")) {
 				deMagi = Boolean.parseBoolean(arg[1]);//pour boolean, pas besoin try..catch, ortho fault va considerer comme false
-				if(deMagi) {use_de = new DeMagi();}//instancier le de
-				else {use_de = new DeNormal();}
 			}	
 			else if(arg[0].equals("cos")) cos = Boolean.parseBoolean(arg[1]);
 			else if(arg[0].equals("pass")) pass = Boolean.parseBoolean(arg[1]);
@@ -67,29 +66,25 @@ public class Lanceur {
 		//demander les noms de joueurs
 		String[] noms = new String[0];
 		do{
-			System.out.println("Veuillez saisir les noms des joueurs, separez par espace");
+			System.out.println("Vous avez choisi "+ nbJoueur + " joueurs.\n" +
+					"Veuillez saisir les noms des joueurs, separez par espace");
 			Scanner sc = new Scanner(System.in);
 			noms = sc.nextLine().split(" ");
 		}while (noms.length != nbJoueur);
 		
-		//instancier chaque joueurs
-		for(int i=0; i<nbJoueur; i++) {
-			Joueur jj = new Joueur(noms[i], plateau, use_de, pass, nbTry, cos, kRepond);
-			joueurs[i] = jj;
-		}
-		
-		
-		//PARTIE 2.
 		//preparer le utilitaire w2v
 		Utilityw2v.readFile(w2v);	
 		//calculer et preparer les normes
 		System.out.println("Pre-calculer les normes...");
 		Map<String, Double> normes = Utilityw2v.normeAll();
-		System.out.println("Finit pre-calculer les normes.\n");	
-
-		//PARTIE 3. LANCER LE JEU
-		System.out.println("\n------ Bienvenu au jeu Geenson -------\n");
+		System.out.println("Finit pre-calculer les normes.\n");
 		
+		//instancier chaque joueurs
+		for(int i=0; i<nbJoueur; i++) {
+			joueurs[i] = new Joueur(noms[i], plateau, deMagi? new DeMagi() : new DeNormal(), pass, nbTry, cos, kRepond);
+		}
+
+		//PARTIE 2. LANCER LE JEU
 		Jeu jeu = new Jeu(joueurs);
 		jeu.afficher();
 		
@@ -104,11 +99,9 @@ public class Lanceur {
 			jeu.unTour();
 		}
 		if (jeu.gameOver()) jeu.rePlay();			
-		
-
 	
 	}//end of main
-
+	
 }//end of class Lanceur
 
 

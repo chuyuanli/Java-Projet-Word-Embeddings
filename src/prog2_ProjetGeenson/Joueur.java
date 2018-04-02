@@ -25,6 +25,7 @@ public class Joueur {
 	public Joueur(String pnom, Plateau plateau, De unDe, boolean lePass, int maxTry, boolean cos, int n) {
 		this.nom = pnom;
 		this.plateau = plateau;
+		this.de = unDe;
 		this.nbJ = countJ;
 		countJ ++;
 		this.pass = lePass;
@@ -53,8 +54,12 @@ public class Joueur {
 	public String toString() {
 		int count = 0;
 		if (this.pass) count = 5;
-		return nbJ + ". " + this.nom + " Case: " + this.position + " " + de.type + " Pass:" + 
-				this.countPass + "/" + count;
+		return nbJ + "." + this.nom + " Position case: " + this.position + " De : " +this.de.type + " Pass:" + 
+				this.countPass + "/" + count ;
+	}
+	
+	public void giveDe(De unDe) {
+		this.de = unDe;
 	}
 	
 	
@@ -87,7 +92,7 @@ public class Joueur {
 			if (!pass) {
 				ArrayList<String> dixMots = reponses();
 				if(bingo(motX, dixMots)) {
-					System.out.println("Bravo ! Vous avez denive le mot " + motX);
+					System.out.println("Bravo ! Vous avez bien devine le mot : " + motX);
 					correcte = true;
 				}
 				nbGuess ++;
@@ -108,7 +113,7 @@ public class Joueur {
 	
 	//methode qui fournit un mot et demande(print) le joueur a deviner
 	public String motADeviner() {
-		System.out.println("Mot pret, denivez!\n");
+		System.out.println("\nMot à deviner est pret !");
 		return Utilityw2v.giveWord();
 	}
 	

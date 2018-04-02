@@ -55,8 +55,7 @@ public class Utilityw2v {
 		}
 		return w2v;
 	}
-	
-	
+		
 	public static double[] getVecs(String a) {
 		if(w2v.containsKey(a)) return w2v.get(a);
 		else throw new IllegalArgumentException("Mot "+a+" n'existe pas dans w2v.");

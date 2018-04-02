@@ -7,6 +7,7 @@ public class Jeu {
 	protected Joueur[] joueurs;
 	
 	public Jeu(Joueur[] players) {
+		System.out.println("------ Commencons le jeu ! --------\n");
 		this.vuePlat = new Plateau();
 		this.joueurs = players;
 	}
@@ -28,7 +29,7 @@ public class Jeu {
 	 
 	//pour indiquer la fin du jeu
 	public boolean gameOver() {
-		return !winner().equals(null);
+		return winner() != null;
 	}
 	
 	//indiquer le gagnant
