@@ -7,10 +7,12 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.ReadOnlyFileSystemException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
+import java.util.Set;
 import java.util.TreeMap;
 
 public class Utilityw2v {
@@ -26,6 +28,12 @@ public class Utilityw2v {
 	
 	public static int vocTaille() {
 		return w2v.size();
+	}
+	
+	public static ArrayList<String> voc() {
+		Set<String> vocs = w2v.keySet();
+		ArrayList<String> list = new ArrayList<String>(vocs);
+		return list;
 	}
 		
 	public static Map<String, double[]> readFile(String input) throws IOException {

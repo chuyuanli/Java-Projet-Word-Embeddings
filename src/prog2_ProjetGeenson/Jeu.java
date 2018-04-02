@@ -18,7 +18,7 @@ public class Jeu {
 	}	
 	
 	//methode pour faire un tour
-	public void unTour() {
+	public void unTour() throws WordNotFoundException {
 		for (Joueur jj: joueurs) {
 			jj.move();
 			jj.guessWord();
