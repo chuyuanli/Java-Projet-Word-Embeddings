@@ -17,7 +17,7 @@ public class Joueur {
 	protected boolean pass; //si joueur veut choisir l'option pass
 	protected int countPass; //en total 5 passes seront autorisees
 	protected final int nbTry; //nb max d'essai pour un mot, par default=3
-	protected Map<String, Double> normes;//pareil pour tous les joueurs
+	protected Map<String, Double> normes = Utilityw2v.normeAll();//pareil pour tous les joueurs
 	protected boolean cos; //si le joueur choisit la similarite cos, par default = true
 	protected int n; //prendre les n premiers mots calcules comme reponses, par default = 10
 	

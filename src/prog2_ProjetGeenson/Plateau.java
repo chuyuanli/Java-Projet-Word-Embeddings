@@ -23,8 +23,6 @@ public class Plateau {
 		this(24);
 	}
 	
-	
-	
 	//methode pour choisir aleatoirement choisir 6 cases magiques dont 3 de type magi1 et 3 de type magi2
 	public void generateMagiCase() {
 		ArrayList<Integer> list = new ArrayList<Integer>();
@@ -59,8 +57,5 @@ public class Plateau {
 			if (!plateau[i].nom.equals("case_normale")) System.out.println("case "+ i + ": " + plateau[i].getMessage());
 		}
 	}
-	
-	
-	
-	
+
 }

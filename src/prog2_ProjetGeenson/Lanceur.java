@@ -13,61 +13,105 @@ import pack.word2vec.Utilityw2v;
 
 public class Lanceur {
 		
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException, WordNotFoundException {
 		//PARTIE 1. TRAITER LES ARGUMENTS
-		//String chemin = (args[0].split("="))[1];
-//		String nbJ = args[1]; //need prepare a list of Joueurs and passe it to Lanceur()
-//		String nbTry = args[2];
-//		String deMagi = args[3];
-		for (String i: args) System.out.println(i);
+		String w2v = "/Users/lichuyuan/Desktop/JavaProjet/w2v_final";		
+		//arguments optionnels, les valeurs par default
+		int nbJoueur = 2;
+		int nbTry = 3;
+		int kRepond = 10;
+		int nbCase = 24;
+		boolean deMagi = false;
+		boolean cos = true;
+		boolean pass = false;
+		Plateau plateau = new Plateau();
+		De use_de = new DeNormal();
+		Joueur[] joueurs = new Joueur[nbJoueur];
 		
-		//arguments obligatoires
-		String w2v;
-		int nbJoueur;
-		String nomJoueur;
-		//arguments optionnels
-		int nbTry;//default=3
-		int kRepond;//par default=10
-		boolean deMagi;//false
-		boolean cos;//true
-		boolean pass;//false
+		for (int i=0; i<args.length; i++) {
+			String[] arg = args[i].split("=");
+			if (arg[0].equals("w2v")) w2v = arg[1];
+			else if(arg[0].equals("nbJoueur")) {
+				try {
+				nbJoueur = Integer.parseInt(arg[1]);
+				}catch(NumberFormatException e) {
+					e.getMessage();
+				};
+				if(nbJoueur <= 2) throw new IllegalArgumentException("Nb joueurs inferieur de 2 !");
+			}
+			else if(arg[0].equals("nbTry")) {
+				try {
+				nbTry = Integer.parseInt(arg[1]);
+				}catch(NumberFormatException e) {e.getMessage();};	
+			}
+			else if(arg[0].equals("kRespond")){
+				try {
+				kRepond = Integer.parseInt(arg[1]);
+				}catch(NumberFormatException e) {e.getMessage();};	
+			}
+			else if(arg[0].equals("nbCase")){
+				try {
+				nbCase = Integer.parseInt(arg[1]);
+				}catch(NumberFormatException e) {e.getMessage();};
+				plateau = new Plateau(nbCase); //instancier le plateau
+			}
+			else if(arg[0].equals("deMagi")) {
+				deMagi = Boolean.parseBoolean(arg[1]);//pour boolean, pas besoin try..catch, ortho fault va considerer comme false
+				if(deMagi) {use_de = new DeMagi();}//instancier le de
+				else {use_de = new DeNormal();}
+			}	
+			else if(arg[0].equals("cos")) cos = Boolean.parseBoolean(arg[1]);
+			else if(arg[0].equals("pass")) pass = Boolean.parseBoolean(arg[1]);
+		}
+		
+		//demander les noms de joueurs
+		String[] noms = new String[0];
+		do{
+			System.out.println("Veuillez saisir les noms des joueurs, separez par espace");
+			Scanner sc = new Scanner(System.in);
+			noms = sc.nextLine().split(" ");
+		}while (noms.length != nbJoueur);
+		
+		//instancier chaque joueurs
+		for(int i=0; i<nbJoueur; i++) {
+			Joueur jj = new Joueur(noms[i], plateau, use_de, pass, nbTry, cos, kRepond);
+			joueurs[i] = jj;
+		}
 		
 		
+		//PARTIE 2.
+		//preparer le utilitaire w2v
+		Utilityw2v.readFile(w2v);	
+		//calculer et preparer les normes
+		System.out.println("Pre-calculer les normes...");
+		Map<String, Double> normes = Utilityw2v.normeAll();
+		System.out.println("Finit pre-calculer les normes.\n");	
+
+		//PARTIE 3. LANCER LE JEU
+		System.out.println("\n------ Bienvenu au jeu Geenson -------\n");
 		
-//		String chemin = args[0];
-//		System.out.println(chemin+"\n");
-//			
-//		//PARTIE 2.
-//		//preparer le utilitaire w2v
-//		Utilityw2v.readFile(chemin);	
-//		//calculer et preparer les normes
-//		System.out.println("Pre-calculer les normes...");
-//		Map<String, Double> normes = Utilityw2v.normeAll();
-//		System.out.println("Finit pre-calculer les normes.\n");
-//		
-//
-//		int nbPlayer = 2;
-//		//PARTIE 3. LANCER LE JEU
-//		System.out.println("------ Bienvenu au jeu Geenson -------");
-//		
-//		Jeu jj = new Jeu(nbPlayer);
-//		jj.afficher();
-//		
-//		while(!jj.gameOver()) {
-//			System.out.println("Appuyer sur enter pour continuer");
-//			Scanner scanner = new Scanner(System.in);
-//			String s = scanner.nextLine(); 
-//			while (s.length()!=0) {
-//				System.out.println("Veuillez taper que sur Enter pour continuer");
-//				s = scanner.nextLine();	
-//			}
-//			jj.unTour();
-//		}
-//		if (jj.gameOver()) jj.rePlay();	
+		Jeu jeu = new Jeu(joueurs);
+		jeu.afficher();
+		
+		while(!jeu.gameOver()) {
+			System.out.println("Appuyer sur enter pour continuer");
+			Scanner scanner = new Scanner(System.in);
+			String s = scanner.nextLine(); 
+			while (s.length()!=0) {
+				System.out.println("Veuillez taper que sur Enter pour continuer");
+				s = scanner.nextLine();	
+			}
+			jeu.unTour();
+		}
+		if (jeu.gameOver()) jeu.rePlay();			
+		
+
 	
 	}//end of main
 
-}
+}//end of class Lanceur
+
+
 
 //NOTES:
 //quand calculer cosinus, moyenne ou addition donnent le meme resultat, car cosinus mesure the angle
