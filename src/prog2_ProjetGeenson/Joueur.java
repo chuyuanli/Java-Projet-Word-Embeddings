@@ -66,6 +66,7 @@ public class Joueur {
 	//lancer le de et avancer/rester
 	public void move() {
 		int moveTo = de.lancerDe();
+		System.out.println("Lancer dé ! De = " + moveTo);
 		//si c'est un de magique et il tombe sur la face piege, alors on pause un tour
 		if(moveTo == 0) {
 			System.out.println("Face piege! Restez ou vous etes!");
@@ -95,6 +96,7 @@ public class Joueur {
 					System.out.println("Bravo ! Vous avez bien devine le mot : " + motX);
 					correcte = true;
 				}
+				else System.out.println("Le mot à deviner n'est pas dans la liste. Veuillez reessayer...");
 				nbGuess ++;
 			}
 			else if(pass && this.countPass <= 5) {

@@ -5,5 +5,5 @@ public abstract class De {
 	
 	//methode pour obtenir le point du de
 	public abstract int lancerDe();
-
+	
 }

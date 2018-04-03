@@ -21,10 +21,12 @@ public class Jeu {
 	//methode pour faire un tour
 	public void unTour() throws WordNotFoundException {
 		for (Joueur jj: joueurs) {
+			System.out.println("\n*** Tour de joueur "+jj.nom + " ***");
 			jj.move();
 			jj.guessWord();
 		}
-		//afficher();
+		System.out.println("\n*** Résumé ***");
+		afficher();
 	}
 	 
 	//pour indiquer la fin du jeu

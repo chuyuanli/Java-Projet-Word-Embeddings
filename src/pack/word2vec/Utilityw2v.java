@@ -31,7 +31,7 @@ public class Utilityw2v {
 	}
 	
 	public static ArrayList<String> voc() {
-		Set<String> vocs = w2v.keySet();
+		Set<String> vocs = w2v.keySet();//recuperer le voc en prenant les cles 
 		ArrayList<String> list = new ArrayList<String>(vocs);
 		return list;
 	}
