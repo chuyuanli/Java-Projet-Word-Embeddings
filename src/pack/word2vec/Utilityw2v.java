@@ -77,7 +77,7 @@ public class Utilityw2v {
 		}
 		else if(!w2v.containsKey(a)) throw new IllegalArgumentException("Mot " + a + "n'existe pas dans w2v.");
 		else if(!w2v.containsKey(a)) throw new IllegalArgumentException("Mot " + b + "n'existe pas dans w2v.");
-		else throw new IllegalArgumentException("Mot " + c + "n'existe pas dans w2v.");
+		else throw new IllegalArgumentException("Mot " + c + " n'existe pas dans w2v.");
 	}
 	
 	
@@ -212,14 +212,14 @@ public class Utilityw2v {
 	public static ArrayList<String> nFirst(int n, TreeMap<String, Double> sorted_score) {
 		int count = 0;
 		TreeMap<String,Double> target = new TreeMap<String,Double>();
-		 for (Map.Entry<String,Double> entry:sorted_score.entrySet()) {
-			 if (count >= n) break;
-		     target.put(entry.getKey(), entry.getValue());
-		     count ++;
-		  }
-		  System.out.println(target);
-		  ArrayList<String> mots = new ArrayList<String>(target.keySet());
-		  return mots;
+		for (Map.Entry<String,Double> entry:sorted_score.entrySet()) {
+			if (count >= n) break;
+		    target.put(entry.getKey(), entry.getValue());
+		    count ++;
+		 }
+		 System.out.println(target);
+		 ArrayList<String> mots = new ArrayList<String>(target.keySet());
+		 return mots;
 	}	
 	
 	
@@ -232,7 +232,7 @@ public class Utilityw2v {
 			motX = keys.get(random.nextInt(keys.size()));
 		}while(chosenW.contains(motX)); //evider les mots repretitifs
 		chosenW.add(motX);
-		System.out.println("Mot a deviner = " + motX);
+		System.out.println("[Mot a deviner = " + motX + "]");
 		return motX;
 	}
 	

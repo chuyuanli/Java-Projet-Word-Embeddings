@@ -93,8 +93,8 @@ public class Joueur {
 			if (!pass) {
 				ArrayList<String> dixMots = reponses();
 				if(bingo(motX, dixMots)) {
-					System.out.println("Bravo ! Vous avez bien devine le mot : " + motX);
-					correcte = true;
+					System.out.println("Bravo ! Vous avez bien devine le mot : " + motX +"\nVous continuez à jouer !");
+					guessWord(); //si le joueur a bien devine, il continue 
 				}
 				else System.out.println("Le mot à deviner n'est pas dans la liste. Veuillez reessayer...");
 				nbGuess ++;
@@ -109,7 +109,7 @@ public class Joueur {
 				pass = false;
 			}
 		}
-		if(nbGuess > this.nbTry) System.out.println("Oops... Vous n'avez plus d'essai.\nTour au joueur suivant...");
+		if(nbGuess > this.nbTry+1) System.out.println("Oops... Vous n'avez plus d'essai.\nTour au joueur suivant...");
 	}
 	
 	
@@ -123,32 +123,41 @@ public class Joueur {
 	//methode qui lit la reponse de joueur et fournit 10 mots les plus similaires(print out)
 	//return un array de 10 mots
 	public ArrayList<String> reponses() throws WordNotFoundException {
-		//traiter les reponses du joueur
+		//initialiser les 3 indices
+		String ind1 = null;
+		String ind2 = null;
+		String ind3 = null;
+		boolean motInconu = false;
 		String[] parts = new String[0];
 		String res = "";
+		//traiter les reponses du joueur		
 		do {
 		System.out.println("Veuillez entrer les 3 indices : ");
 		Scanner sc = new Scanner(System.in);
 		res = sc.nextLine();
 		parts = res.split(" ");
-		}while (parts.length != 3); //assurer que le joueur entre 3 indices
 		
-		String ind1 = parts[0];
-		String ind2 = parts[1];
-		String ind3 = parts[2];
+		ind1 = parts[0];
+		ind2 = parts[1];
+		ind3 = parts[2];
 		
-		if(! Utilityw2v.voc().contains(ind1)) throw new WordNotFoundException(ind1 + " n'exite pas dans w2v.");
-		else if (! Utilityw2v.voc().contains(ind2)) throw new WordNotFoundException(ind2 + " n'exite pas dans w2v.");
-		else if (! Utilityw2v.voc().contains(ind3)) throw new WordNotFoundException(ind3 + " n'exite pas dans w2v.");
-		else {//3 indices existent dans w2v
-			//calculer moyen
-			double[] moyenne = Utilityw2v.moyenne(ind1, ind2, ind3);
-			//calculer sum
-			//double[] sum = Utilityw2v.addition("calcul", "clavier", "écran");
-			//sortir les N premiers mots
-			ArrayList<String> topNmots = Utilityw2v.topNmots(moyenne, normes, n, cos);
-			return topNmots;
-		}
+		if(!Utilityw2v.voc().contains(ind1) || ! Utilityw2v.voc().contains(ind2) || ! Utilityw2v.voc().contains(ind3)) {
+			System.out.println("Le mot que vous avez saisi n'existe pas dans w2v...");
+			motInconu = true;
+			}
+		else {motInconu = false;}		
+		}while (parts.length != 3 || motInconu); //assurer que le joueur entre 3 indices et que ces 3 indices existent dans w2v
+//		if(! Utilityw2v.voc().contains(ind1)) throw new WordNotFoundException(ind1 + " n'exite pas dans w2v.");
+//		else if (! Utilityw2v.voc().contains(ind2)) throw new WordNotFoundException(ind2 + " n'exite pas dans w2v.");
+//		else if (! Utilityw2v.voc().contains(ind3)) throw new WordNotFoundException(ind3 + " n'exite pas dans w2v.");
+		
+		//si tous les 3 indices existent dans w2v, calculer moyen
+		double[] moyenne = Utilityw2v.moyenne(ind1, ind2, ind3);
+		//calculer sum
+		//double[] sum = Utilityw2v.addition("calcul", "clavier", "écran");
+		//sortir les N premiers mots
+		ArrayList<String> topNmots = Utilityw2v.topNmots(moyenne, normes, n, cos);
+		return topNmots;	
 	}
 	
 	
