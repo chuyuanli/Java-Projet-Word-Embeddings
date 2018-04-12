@@ -16,7 +16,7 @@ public class Lanceur {
 	public static void main(String[] args) throws IOException, WordNotFoundException {
 		//PARTIE 1. TRAITER LES ARGUMENTS
 		System.out.println("\n------ Bienvenu au jeu Geenson -------\n");
-		String w2v = "/Users/lichuyuan/Desktop/JavaProjet/w2v_final";		
+		String w2v = "";		
 		//arguments optionnels, les valeurs par default
 		int nbJoueur = 2;
 		int nbTry = 3;
@@ -45,7 +45,7 @@ public class Lanceur {
 				nbTry = Integer.parseInt(arg[1]);
 				}catch(NumberFormatException e) {e.getMessage();};	
 			}
-			else if(arg[0].equals("kRespond")){
+			else if(arg[0].equals("kRepond")){
 				try {
 				kRepond = Integer.parseInt(arg[1]);
 				}catch(NumberFormatException e) {e.getMessage();};	
@@ -72,12 +72,21 @@ public class Lanceur {
 			noms = sc.nextLine().split(" ");
 		}while (noms.length != nbJoueur);
 		
+		//afficher les parametres que les joueurs choisissent
+		System.out.println("\n*** PARAMETRES DU JEU ***");
+		String de = deMagi ? "De magique":"De normal";
+		String p = pass ? "Pass autorise (5 fois max)" : "Pas de pass";
+		String metri = cos ? "Similarite cosinus" : "Distance euclidienne";
+		System.out.println("NB JOUEURS : " + nbJoueur + "\nDE UTILISE :" + de + "\nNB TRY : " + nbTry + "\nPASS : "
+				+ p + "\nNB K : " + kRepond + "\nMETRIQUE  : " + metri + "\nNB CASE : " + nbCase + "\n");				
 		//preparer le utilitaire w2v
 		Utilityw2v.readFile(w2v);	
 		//calculer et preparer les normes
 		System.out.println("Pre-calculer les normes...");
 		Map<String, Double> normes = Utilityw2v.normeAll();
 		System.out.println("Finit pre-calculer les normes.\n");
+		
+		System.out.println("*** FIN DE PARAMETRES ***\n");
 		
 		//instancier chaque joueurs
 		for(int i=0; i<nbJoueur; i++) {
