@@ -9,7 +9,7 @@ public class CaseMagi2 extends Case {
 
 	@Override
 	public String getMessage() {
-		return "Reculer de tros cases";
+		return "Reculer de trois cases";
 	}
 
 

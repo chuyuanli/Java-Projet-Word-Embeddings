@@ -17,7 +17,7 @@ class ValueComparator implements Comparator<String> {
 	        if (base.get(a) >= base.get(b)) return -1;
 	        else return 1;
     		}
-    		else {//cos=false
+    		else {//cos=false, utilise euclidien
     			if (base.get(a) >= base.get(b)) return 1;
     	        else return -1;
     		}

@@ -5,8 +5,6 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.Scanner;
 
-import javax.sound.midi.VoiceStatus;
-
 import pack.word2vec.Utilityw2v;
 
 public class Joueur {
@@ -22,7 +20,7 @@ public class Joueur {
 	protected Map<String, Double> normes = Utilityw2v.normeAll();//pareil pour tous les joueurs
 	protected boolean cos; //si le joueur choisit la similarite cos, par default = true
 	protected int n; //prendre les n premiers mots calcules comme reponses, par default = 10
-	
+	private String motAdeviner=null;
 	
 	public Joueur(String pnom, Plateau plateau, De unDe, boolean lePass, int maxTry, boolean cos, int n) {
 		this.nom = pnom;
@@ -85,7 +83,7 @@ public class Joueur {
 	
 	//processus d'un tour pour deviner un mot (package les 4 methodes suivantes)
 	public void guessWord() throws WordNotFoundException {
-		String motX = motADeviner();	
+		this.motAdeviner= motADeviner();	
 		boolean correcte = false;
 		boolean pass = false;
 		int nbGuess = 1;	
@@ -94,8 +92,8 @@ public class Joueur {
 			if(this.pass) pass = demandePass(); //si le joueur choisit l'option pass, lui demande s'il veut l'utiliser avant chaque essai
 			if (!pass) {
 				ArrayList<String> dixMots = reponses();
-				if(bingo(motX, dixMots)) {
-					System.out.println("Bravo ! Vous avez bien devine le mot : " + motX +"\nVous continuez à jouer !");
+				if(bingo(motAdeviner, dixMots)) {
+					System.out.println("Bravo ! Vous avez bien devine le mot : " + motAdeviner+"\nVous continuez à jouer !");
 					guessWord(); //si le joueur a bien devine, il rejoue
 				}
 				else System.out.println("Le mot à deviner n'est pas dans la liste. Veuillez reessayer...");
@@ -135,7 +133,7 @@ public class Joueur {
 		//traiter les reponses du joueur, 2 boucles while pour assurer le nb d'arguments et les mots saisis sont bien dans w2v
 		do {
 			do { //ici on ajoute un boucle pour evider ArrayIndexOutOfRange Exception
-			System.out.println("Veuillez entrer les 3 indices : ");
+			System.out.println("Veuillez entrer les 3 indices différents entre eux, et différents du mot à deviner : ");
 			Scanner sc = new Scanner(System.in);
 			res = sc.nextLine();
 			parts = res.split(" ");
@@ -152,8 +150,10 @@ public class Joueur {
 				else System.out.println("Le mot \'" + ind3 + "\' que vous avez saisi n'existe pas dans w2v...");
 				motInconu = true;
 				}
-			else {motInconu = false;}		
-		}while (motInconu); //assurer que le joueur entre 3 indices et que ces 3 indices existent dans w2v
+			else {motInconu = false;}
+			
+			
+		}while (motInconu || ind1.equals(ind2)||ind1.equals(ind3)||ind3.equals(ind2)||ind1.equals(motAdeviner)||ind2.equals(motAdeviner)||ind3.equals(motAdeviner)); //assurer que le joueur entre 3 indices et que ces 3 indices existent dans w2v
 		
 		//si tous les 3 indices existent dans w2v, calculer la moyenne
 		double[] moyenne = Utilityw2v.moyenne(ind1, ind2, ind3);

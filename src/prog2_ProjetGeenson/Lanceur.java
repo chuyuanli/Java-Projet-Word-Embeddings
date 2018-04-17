@@ -45,7 +45,7 @@ public class Lanceur {
 				nbTry = Integer.parseInt(arg[1]);
 				}catch(NumberFormatException e) {e.getMessage();};	
 			}
-			else if(arg[0].equals("kRepond")){
+			else if(arg[0].equals("kRespond")){
 				try {
 				kRepond = Integer.parseInt(arg[1]);
 				}catch(NumberFormatException e) {e.getMessage();};	
