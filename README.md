@@ -11,20 +11,26 @@ exactement la graphie (minsucule/majuscule, espace/pas espace):
 	   -Nombre d'essais: "nbTry=<n>" 
 	   -Nombre de voisins renvoyés par le jeu: "kRespond=<n>"
 	   -Nombre de cases: "nbCase=<n>" (/!\ Minimum 24)
-	   -Présence d'un dé magique: "deMagi=true"   ou non: "deMagi=false"
-	   -Methode cosinus: "cos=true"       ou   Distance euclidienne: "cos=false"
-	   -Droit au pass:"pass=true"        ou non: "pass=false"
+	   -Présence d'un dé magique: "deMagi=true" ou non: "deMagi=false"
+	   -Methode cosinus: "cos=true" ou Distance euclidienne: "cos=false"
+	   -Droit au pass:"pass=true" ou non: "pass=false"
 
 Dans chaque cas, n doit être un entier naturel.
 Une fois le jeu lancé, il vous sera demandé d'entrer le nom des joueurs séparés par un espace. Assurez-vous de rentrer le bon nombre de noms.
 Puis les configurations sont affichées.
 Le jeu peut alors commencer !
 
-2.REGLES DU JEU:
+2. REGLES DU JEU:
 
-	 Principe et but: Ce jeu est un jeu de vocabulaire. Nous nous situons sur un plateau classique, avec des cases. A chaque case le joueur doit faire deviner au jeu un mot généré aléatoirement, en entrant 3 mots qu'il pense proches sémantiquement de ce dernier. Ils doivent être différents entre eux et différents du mot à deviner.
-	 L'ordinateur donne une liste de k mots les plus proches, trouvés sur la base d'un calcul de similarité cosinus (ou euclidienne selon les configurations). Par défaut on a 3 essais (3 fois 3 indices).
-	 Si le mot à deviner fait partie des k propositions de l'ordinateur, on a réussi et on peut relancer le dé et rejouer.
-   Il existe des cases-piège placées aléatoirement sur le plateau. Trois d'entre elles font reculer de 3 cases, les trois autres permettent de relancer le dé.
-	 Il existe aussi un dé magique qui contient des faces numérotées de 0 à 5.
-	 Le but du jeu est d'arriver le premier à la dernière case ou de la dépasser.
+Ce jeu est un jeu de vocabulaire. Nous nous situons sur un plateau classique, avec des cases dont stockent des mots à deviner. Le but du jeu est d'arriver le premier à la dernière case ou de la dépasser.
+
+
+	 - Après avoir lancé le dé, le joueur doit faire deviner un mot généré aléatoirement, en entrant 3 mots (indices) qu'il pense proches sémantiquement de ce dernier. 
+	 - Les indices doivent être différents entre eux et différents du mot à deviner.
+	 - L'ordinateur donne une liste de k mots les plus proches, trouvés sur la base d'un calcul de similarité cosinus (ou euclidienne selon les configurations). 
+	 - Par défaut on a 3 essais par joueur pour un tour.
+	 - Si le mot à deviner fait partie des k propositions de l'ordinateur, on a réussi et on peut relancer le dé et rejouer.
+   
+   /!\ Il existe des cases-piège placées aléatoirement sur le plateau. Trois d'entre elles font 'reculrer de 3 cases', les trois autres permettent de 'relancer le dé'.
+   /!\ Il existe aussi un dé magique qui contient des faces numérotées de 0 à 5.
+
