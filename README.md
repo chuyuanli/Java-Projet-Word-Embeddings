@@ -28,13 +28,15 @@ Ce jeu est un jeu de vocabulaire. Nous nous situons sur un plateau classique, av
 	 - Après avoir lancé le dé, vous devez faire deviner un mot généré aléatoirement.
 	 - Entrez 3 mots (indices) que vous pensez proches sémantiquement de ce dernier. 
 	 - Les indices doivent être différents entre eux et différents du mot à deviner.
-	 - L'ordinateur donne une liste de k mots les plus proches, trouvés sur la base d'un calcul de similarité cosinus (ou euclidienne selon les configurations). 
+	 - L'ordinateur donne une liste de k mots les plus proches, trouvés sur la base d'un calcul de similarité.
 	 - Par défaut 3 essais par joueur pour un tour.
-	 - Si vous le souhaitez, choisissez pass=true dès le début pour avoir au maximum 5 fois 'passer ce mot'.
-	 - Si le mot à deviner fait partie des k propositions de l'ordinateur, on a réussi et on peut relancer le dé et rejouer.
+	 - Si vous le souhaitez, choisissez pass=true dès le début pour avoir au maximum 5 fois "passer ce mot".
+	 - Si le mot à deviner fait partie des k propositions de l'ordinateur, on a réussi et on peut relancer le dé.
 	 - Quand un joueur gagne, on vous demande si vous voulez commencer encore une partie de jeu.
    
 /!\ Il existe des cases-piège placées aléatoirement sur le plateau. Trois d'entre elles font 'reculrer de 3 cases', les trois autres permettent de 'relancer le dé'.
    
 /!\ Il existe aussi un dé magique qui contient des faces numérotées de 0 à 5.
+
+/!\ Veuillez bien vouloir suivre les instructions données par l'ordinateur, si votre saisi ne correspond pas à ce qu'on attend; l'ordinateur ne cesserait pas de vous redemander. 
 
