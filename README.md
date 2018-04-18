@@ -38,5 +38,5 @@ Ce jeu est un jeu de vocabulaire. Nous nous situons sur un plateau classique, av
    
 /!\ Il existe aussi un dé magique qui contient des faces numérotées de 0 à 5.
 
-/!\ Veuillez bien vouloir suivre les instructions données par l'ordinateur, si votre saisi ne correspond pas à ce qu'on attend; l'ordinateur ne cesserait pas de vous redemander. 
+/!\ Veuillez bien vouloir suivre les instructions données par l'ordinateur, si votre saisie ne correspond pas à ce qu'on attend; l'ordinateur va vous redemander. 
 
