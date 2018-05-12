@@ -1,4 +1,4 @@
-1. LANCER LE JEU
+# LANCER LE JEU
 
 Au moment de lancer le jeu depuis le Terminal, il faut impérativement spécifier le chemin de votre fichier word2vec avec la commande suivante:
 
@@ -20,7 +20,7 @@ Une fois le jeu lancé, il vous sera demandé d'entrer le nom des joueurs sépar
 Puis les configurations sont affichées.
 Le jeu peut alors commencer !
 
-2. REGLES DU JEU:
+# REGLES DU JEU:
 
 Ce jeu est un jeu de vocabulaire. Nous nous situons sur un plateau classique, avec des cases dont stockent des mots à deviner. Le but du jeu est d'arriver le premier à la dernière case ou de la dépasser.
 
@@ -43,9 +43,9 @@ Ce jeu est un jeu de vocabulaire. Nous nous situons sur un plateau classique, av
 Bon jeu :D
 
 
-3. ARCHITECTURE GÉNÉRALE DE L'IMPLÉMENTATION
+# ARCHITECTURE GÉNÉRALE DE L'IMPLÉMENTATION
 
-# Projet Principal (Package_Greenson)
+1. Projet Principal (Package_Greenson)
 - Classes abstraites : 
 	- Classe Case (3 classes d'enfants) :
 		- CaseMagi1
@@ -62,17 +62,16 @@ Bon jeu :D
 	- Lanceur (lancer un jeu)
 
 - Exception :
-	Pour générer l'exception quand l'utilisateur entre un mot inconnu dans le corpus; une exception héritée de Exception a été créée. Elle va afficher un message d'erreur et demander l'utilisateur entrer un autre mot :
-		- WordNotFoundException 
+	- WordNotFoundException : pour générer l'exception quand l'utilisateur entre un mot inconnu dans le corpus; une exception héritée de Exception a été créée. Elle va afficher un message d'erreur et demander l'utilisateur entrer un autre mot
 
-# Partie Support (Package_word2vec)
+2. Partie Support (Package_word2vec)
 - Utilitaire :
 	- Utilityw2v : contient tous les méthodes pour calculer la similarité cosinus ou euclidienne
 
 - Interface :
 	- ValueComparator implements Comparator<T> : redéfinir la méthode compare en fonction de la similarité cosinus ou euclidienne
 
-# Astuce de Pre-calcul des Normes
+3. Astuce de Pre-calcul des Normes
 Pour rendre le déroulement plus fluide, avant le commencement du jeu, nous allons d'abord pre-calculer les normes pour chaque mot : sqrt(∑ a^2). C'est la raison pour laquelle vous allez voir deux lignes indiquant le processus du pre-calcul. Cela prendra quelques secondes, après avoir fini, le jeu commence !
 
 
