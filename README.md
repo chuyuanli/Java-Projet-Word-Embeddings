@@ -42,3 +42,45 @@ Ce jeu est un jeu de vocabulaire. Nous nous situons sur un plateau classique, av
 
 Bon jeu :D
 
+
+3. ARCHITECTURE GÉNÉRALE DE L'IMPLÉMENTATION
+
+# Projet Principal (Package_Greenson)
+- Classes abstraites : 
+	- Classe Case (3 classes d'enfants) :
+		- CaseMagi1
+		- CaseMagi2
+		- CaseNormale
+	- Classe Dé (2 classes d'enfants) :
+		- DéMagi
+		- DéNormal
+
+- Autres Classes :
+	- Joueur (décrire un joueur)
+	- Plateau (décrire un plateau qui génère des cases)
+	- Jeu (créer une partie de jeu)
+	- Lanceur (lancer un jeu)
+
+- Exception :
+	Pour générer l'exception quand l'utilisateur entre un mot inconnu dans le corpus; une exception héritée de Exception a été créée. Elle va afficher un message d'erreur et demander l'utilisateur entrer un autre mot :
+		- WordNotFoundException 
+
+# Partie Support (Package_word2vec)
+- Utilitaire :
+	- Utilityw2v : contient tous les méthodes pour calculer la similarité cosinus ou euclidienne
+
+- Interface :
+	- ValueComparator implements Comparator<T> : redéfinir la méthode compare en fonction de la similarité cosinus ou euclidienne
+
+# Astuce de Pre-calcul des Normes
+Pour rendre le déroulement plus fluide, avant le commencement du jeu, nous allons d'abord pre-calculer les normes pour chaque mot : sqrt(∑ a^2). C'est la raison pour laquelle vous allez voir deux lignes indiquant le processus du pre-calcul. Cela prendra quelques secondes, après avoir fini, le jeu commence !
+
+
+
+
+
+
+
+
+
+
