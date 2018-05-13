@@ -1,13 +1,19 @@
 package prog2_ProjetGeenson;
-
 import java.util.ArrayList;
 import java.util.Collections;
-
+/**
+ * C'est une classe qui décrit un plateau qui génère des cases
+ * @author lichuyuan
+ * @version 1.0
+ */
 public class Plateau {
 	protected Case[] plateau;
 	protected int nbCase;
 	
-	//version nb de case choisit par joueur
+	/**
+	 * Il construit un plateau avec le nombre de cases choisi par le joueur
+	 * @param newNbCase le nombre de cases que les joueurs choissent; minimum 24 cases
+	 */
 	public Plateau(int newNbCase) {
 		if(newNbCase < 24) throw new IllegalArgumentException("Erreur: nb de case inferieur de 24 !");
 		this.nbCase = newNbCase;
@@ -18,12 +24,16 @@ public class Plateau {
 		generateMagiCase();	
 	}
 	
-	//surcharge constructeur, version standard, nb de case=24
+	/**
+	 * Surcharge constructeur, version standard, nombre de case=24
+	 */
 	public Plateau() {
 		this(24);
 	}
 	
-	//methode pour choisir aleatoirement choisir 6 cases magiques dont 3 de type magi1 et 3 de type magi2
+	/**
+	 * Méthode pour choisir aléatoirement 6 cases magiques dont 3 de type magi1 et 3 de type magi2 
+	 */
 	public void generateMagiCase() {
 		ArrayList<Integer> list = new ArrayList<Integer>();
         for (int i=0; i<nbCase; i++) {
@@ -51,7 +61,9 @@ public class Plateau {
         }
 	}
 	
-	//print les cases magiques
+	/**
+	 * Afficher la position des cases magiques
+	 */
 	public void caseSpecial() {
 		for(int i=0; i<nbCase;i++) {
 			if (!plateau[i].nom.equals("case_normale")) System.out.println("case "+ i + ": " + plateau[i].getMessage());

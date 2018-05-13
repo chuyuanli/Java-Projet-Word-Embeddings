@@ -1,5 +1,4 @@
 package prog2_ProjetGeenson;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -10,9 +9,18 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.TreeMap;
 import pack.word2vec.Utilityw2v;
-
+/**
+ * C'est une classe qui lance le jeu
+ * @author lichuyuan
+ * @version 1.0
+ */
 public class Lanceur {
-		
+	/**
+	 * Méthode main prend des arguments saisis par l'utilisateur et les accorder aux variables correspondants.
+	 * @param args une liste de arguments
+	 * @throws IOException
+	 * @throws WordNotFoundException hérite de Exception pour indiquer que le mot saisi par l'utilisateur n'existe pas dans le corpus
+	 */
 	public static void main(String[] args) throws IOException, WordNotFoundException {
 		//PARTIE 1. TRAITER LES ARGUMENTS
 		System.out.println("\n------ Bienvenu au jeu Geenson -------\n");
@@ -110,7 +118,6 @@ public class Lanceur {
 		if (jeu.gameOver()) jeu.rePlay();			
 	
 	}//end of main
-	
 }//end of class Lanceur
 
 

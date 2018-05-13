@@ -1,5 +1,4 @@
 package pack.word2vec;
-
 import java.awt.List;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -14,28 +13,50 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 import java.util.TreeMap;
-
+/**
+ * Utility qui contient tous les méthodes pour calculer la similarité
+ * @author lichuyuan
+ * @version 1.0
+ */
 public class Utilityw2v {
 	private static String file;
 	private static Map<String, double[]> w2v; //stocker <mot, vecs> paire
 	private static ArrayList<String> chosenW = new ArrayList();
 	
-	//Instancier des qu'on lit un ficher w2v
+	/**
+	 * Instancier dès qu'on lit un ficher w2v et stocker les mots et leurs vecteurs dans un map
+	 * @param input le chemin pour accéder au fichier w2v
+	 * @throws IOException
+	 */
 	private Utilityw2v(String input) throws IOException {
 		this.file = input;
 		w2v = readFile(input);
 	}
 	
+	/**
+	 * Calculer la taille de vocabulaire
+	 * @return le nombre de mot dans le corpus
+	 */
 	public static int vocTaille() {
 		return w2v.size();
 	}
 	
+	/**
+	 * Récupérer le vocabulaire en prenant les clés de map
+	 * @return une liste de vocabulaire
+	 */
 	public static ArrayList<String> voc() {
-		Set<String> vocs = w2v.keySet();//recuperer le voc en prenant les cles 
+		Set<String> vocs = w2v.keySet();
 		ArrayList<String> list = new ArrayList<String>(vocs);
 		return list;
 	}
-		
+	
+	/**
+	 * Méthode qui lis un fichier de corpus et stocker les mots et leurs vecteurs sous le forme Hashmap
+	 * @param input
+	 * @return
+	 * @throws IOException
+	 */
 	public static Map<String, double[]> readFile(String input) throws IOException {
 		FileReader fr = new FileReader(input);
 		BufferedReader br = new BufferedReader(fr);
@@ -55,19 +76,35 @@ public class Utilityw2v {
 		}
 		return w2v;
 	}
-		
+	
+	/**
+	 * Méthode qui récupère les vecteur d'un certain mot, throw un exception si le mot n'exite pas
+	 * @param a un mot
+	 * @return
+	 */
 	public static double[] getVecs(String a) {
 		if(w2v.containsKey(a)) return w2v.get(a);
 		else throw new IllegalArgumentException("Mot "+a+" n'existe pas dans w2v.");
 	}
 	
+	/**
+	 * C'est une méthode surchargé toString
+	 * @param a un mot
+	 * @return les vecteurs d'un mot
+	 */
 	public static String toString(String a) {
 		String vecs = "";
 		for (double d: getVecs(a)) vecs += String.valueOf(d) + "\t";
 		return vecs;
 	}
 	
-	//sum les vecteurs du mot a+b+c, et retourne un nouveau vecteur
+	/**
+	 * Méthode qui somme les vecteurs du mot a, b et c, et retourne un nouveau vecteur 
+	 * @param a un mot
+	 * @param b un mot
+	 * @param c un mot
+	 * @return une liste de nouveau vecteurs
+	 */
 	public static double[] addition(String a, String b, String c) {
 		double[] vecSum = new double[w2v.get(a).length];
 		if (w2v.containsKey(a) && w2v.containsKey(b) && w2v.containsKey(c)) {
@@ -80,8 +117,12 @@ public class Utilityw2v {
 		else throw new IllegalArgumentException("Mot " + c + " n'existe pas dans w2v.");
 	}
 	
-	
-	//pareil que addition; a-b, retourne vecteurs
+	/**
+	 * Méthode qui additionne les vecteurs de mot a avec ceux de mot b
+	 * @param a un mot
+	 * @param b un mot
+	 * @return une liste de nouveau vecteurs
+	 */
 	public static double[] soustraction(String a, String b) {
 		double[] vecSoustra = new double[w2v.get(a).length];
 		if (w2v.containsKey(a) && w2v.containsKey(b)) {
@@ -93,7 +134,13 @@ public class Utilityw2v {
 		else throw new IllegalArgumentException("Mot " + b + "n'existe pas dans w2v.");
 	}
 	
-	//a-b+c, retourne vecteurs
+	/**
+	 * Méthode qui fait le calculer a-b+c, retourne nouveaux vecteurs
+	 * @param a un mot
+	 * @param b un mot
+	 * @param c un mot
+	 * @return une liste de nouveau vecteurs
+	 */
 	public static double[] sous_Add(String a, String b, String c) {
 		double[] newV = new double[w2v.get(a).length];
 		if (w2v.containsKey(a) && w2v.containsKey(b) && w2v.containsKey(c)) {
@@ -104,8 +151,13 @@ public class Utilityw2v {
 		else throw new IllegalArgumentException("les mots n'existent pas dans w2v.");
 	}
 
-	
-	//(a+b+c)/3, retourne vecteurs
+	/**
+	 * Méthode qui fait le calculer (a+b+c)/3, retourne nouveaux vecteurs
+	 * @param a un mot
+	 * @param b un mot
+	 * @param c un mot
+	 * @return une liste de nouveau vecteurs
+	 */
 	public static double[] moyenne(String a, String b, String c) {
 		double[] sumVec = addition(a, b, c);
 		double[] newVec = new double[sumVec.length];
@@ -113,16 +165,23 @@ public class Utilityw2v {
 		return newVec;
 	}
 	
-	//sum(a^2), retourne un double
+	/**
+	 * Méthode qui fait la norme sum(a^2)
+	 * @param a une liste de vecteurs
+	 * @return un double
+	 */
 	public static double power2(double[] a) {
 		double result = 0.0;
 		for(int i=0;i<a.length;i++) result += Math.pow(a[i], 2);
 		return result;
 	}
 	
-	
-	//a*b : multiplier deux espace vec et retourne un double score
-	//l'argument motX est le moyen des 3 indices, a represent un mot dans w2v
+	/**
+	 * Méthode qui multiplier deux espace vec et retourne un double score
+	 * @param motX le moyen des 3 indices
+	 * @param a un mot dans w2v
+	 * @return un double
+	 */
 	public static double multiplication(double[] motX, double[] a) {
 		if(motX.length == a.length) { //verifier que les 2 espaces ont la meme taille
 			double multi = 0.0;
@@ -132,8 +191,11 @@ public class Utilityw2v {
 		else throw new IllegalArgumentException("Taille de vecteurs n'est pas egale.");
 	}
 	
-	
-	//calculer la norme d'un espace vec i.e: || b ||, retourne un double
+	/**
+	 * Calculer la norme d'un espace vectoriel i.e: || b ||, retourner un double 
+	 * @param vecs une liste de vecteurs de type double
+	 * @return un double
+	 */
 	public static double norme(double[] vecs) {
 		double somme = 0.0; double norme = 0.0;
 		for(double vec: vecs) somme += Math.pow(vec, 2); 
@@ -141,8 +203,10 @@ public class Utilityw2v {
 		return norme;
 	}
 	
-	
-	//pre-calculer le norme pour tous les mots dans w2v
+	/**
+	 * Pre-calculer la norme pour tous les mots dans w2v 
+	 * @return les mots avec leurs vecteurs normalisés
+	 */
 	public static Map<String, Double> normeAll() {
 		Map<String, Double> norme_all = new HashMap<>(); //Map n'accepte pas type primitive
 		for (String mot: w2v.keySet()) {
@@ -152,24 +216,39 @@ public class Utilityw2v {
 		return norme_all;
 	}
 	
-	
-	//methode pour calculer le score cosinus entre 2 mots = multi(a, b) / norme(a)*norme(b)
+	/**
+	 * Méthode pour calculer le score cosinus entre 2 mots = multi(a, b) / norme(a)*norme(b) 
+	 * @param motX_vec une liste de vecteurs du mot X
+	 * @param a_vec une liste de vectuers du mot a
+	 * @return un double
+	 */
 	public static double cosinus(double[] motX_vec, double[] a_vec) {
 		double numerateur = multiplication(motX_vec, a_vec);
 		double denominateur = norme(motX_vec) * norme(a_vec);		
 		return numerateur / denominateur;
 	}
 	
-	//dist euclidienne = sqrt(a^2 + b^2 - 2ab)
+	/**
+	 * Calculer la distance euclidienne de deux mots fournis : dist euclidienne = sqrt(a^2 + b^2 - 2ab)
+	 * @param motX_vec des vecteurs du mot X
+	 * @param a_vec des vecteurs du mot a
+	 * @return un double
+	 */
 	public static double euclidien(double[] motX_vec, double[] a_vec) {
 		double powX = power2(motX_vec);
 		double powA = power2(a_vec);
 		double multi = multiplication(motX_vec, a_vec);
 		return Math.sqrt(powA + powX - 2*multi);
 	}
-	
-	//package toutes les methodes cosinus, prend le moyenne ou sum des 3 indices et un Map de scores normes pre-calcules
-	//retourne les n mots les plus similaires
+
+	/**
+	 * Méthode qui prend la moyenne ou le sum des 3 indices et calculer les n mots les plus proches
+	 * @param vecs une liste de vecteurs
+	 * @param normes les vecteurs normalisés de tous les mots
+	 * @param n le nombre de mots les plus proches
+	 * @param cos utiliser le calcul cosinus ou euclidien
+	 * @return les n mots les plus similaires
+	 */
 	public static ArrayList<String> topNmots(double[] vecs, Map<String, Double> normes, int n, boolean cos) {
 		HashMap<String, Double> scores = new HashMap<>();	//stocker tous les mots et leur similarite avec l'argment vecs
 		TreeMap<String, Double> sorted_score;//stocker les mots tries
@@ -199,8 +278,12 @@ public class Utilityw2v {
 		return nFirst(n, sorted_score); 
 	}
 	
-	
-	//creer un nouveau TreeMap et trier les scores
+	/**
+	 * Créer un nouveau TreeMap et trier les scores 
+	 * @param untrier les scores non triés
+	 * @param cos utiliser le calcul cosinus ou euclidien
+	 * @return les scores triés
+	 */
 	public static TreeMap<String, Double> trierMap(HashMap<String, Double> untrier, boolean cos) {
 		ValueComparator vc = new ValueComparator(untrier, cos); //redefinir methode compare dans la classe ValueComparator
         TreeMap<String, Double> sorted_score = new TreeMap<String, Double>(vc);
@@ -208,7 +291,12 @@ public class Utilityw2v {
         return sorted_score;
 	}
 	
-	//prendre les n premiers mots dans TreeMap, retourner les 10 premiers mots dans une arrayList
+	/**
+	 * Méthode qui prend les n premiers mots dans TreeMap, retourner les 10 premiers mots dans une arrayList 
+	 * @param n le nombre de mots les plus proches
+	 * @param sorted_score les scores de similarités triés
+	 * @return une liste de mots
+	 */
 	public static ArrayList<String> nFirst(int n, TreeMap<String, Double> sorted_score) {
 		int count = 0;
 		TreeMap<String,Double> target = new TreeMap<String,Double>();
@@ -222,8 +310,10 @@ public class Utilityw2v {
 		 return mots;
 	}	
 	
-	
-	//methode pour choisir aleatoirement un mot et a faire deviner le joueur
+	/**
+	 * Méthode pour choisir aléatoirement un mot et à faire deviner le joueur 
+	 * @return le mot à devinier
+	 */
 	public static String giveWord() {
 		Random random = new Random();
 		ArrayList<String> keys = new ArrayList<String>(w2v.keySet());
@@ -236,12 +326,14 @@ public class Utilityw2v {
 		return motX;
 	}
 	
-	//methode qui indique si le joueur a bien devine le mot
+	/**
+	 * Méthode qui indique si le joueur a bien deviné le mot 
+	 * @param motX le mot à deviner
+	 * @param top10mots une liste de 10 mots calculés selon les indices
+	 * @return true si le mot à deviner est bien dans la liste ; sinon false
+	 */
 	public static boolean goodGuess(String motX, ArrayList<String> top10mots) {		
 		return top10mots.contains(motX);
 	}
-	
-	
-	
 
 }

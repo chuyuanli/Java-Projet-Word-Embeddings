@@ -1,27 +1,42 @@
 package prog2_ProjetGeenson;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.Scanner;
 
 import pack.word2vec.Utilityw2v;
-
+/**
+ * C'est une classe qui décrit un joueur. 
+ * @author lichuyuan
+ * @version 1.0
+ */
 public class Joueur {
 	protected String nom;
 	protected static int countJ = 1;
 	protected int nbJ;
-	protected Plateau plateau; //tous les joueurs jouent dans le meme plateau
-	protected De de; //chaque joueur possede un de
+	protected Plateau plateau;
+	protected De de;
 	protected int position; //position ad hoc dans le plateau, commence par plateau[0]
-	protected boolean pass; //si joueur veut choisir l'option pass
-	protected int countPass; //en total 5 passes seront autorisees
-	protected final int nbTry; //nb max d'essai pour un mot, par default=3
+	protected boolean pass;
+	protected int countPass;
+	protected final int nbTry;
 	protected Map<String, Double> normes = Utilityw2v.normeAll();//pareil pour tous les joueurs
-	protected boolean cos; //si le joueur choisit la similarite cos, par default = true
-	protected int n; //prendre les n premiers mots calcules comme reponses, par default = 10
+	protected boolean cos;
+	protected int n;
 	private String motAdeviner=null;
 	
+	/**
+	 * Il construit un joueur avec son nom, le plateau qu'il se situe, le dé qu'il possède, 
+	 * la permission de passe, le nombre maximal d'eesai, le calcul cosinus ou euclidien,
+	 * et le nombre de mots qu'il prend en compte pour calculer la similarité.
+	 * @param pnom le nom de joueur
+	 * @param plateau le plateau qu'il se situe; tous les joueurs jouent dans le meme plateau
+	 * @param unDe un dé qu'un joueur possède 
+	 * @param lePass si le joueur a l'option pour passer un mot (en total 5 passes seront autorisees)
+	 * @param maxTry nb max d'essai pour un mot, par default=3
+	 * @param cos si le joueur choisit la similarite cos, par default = true
+	 * @param n prendre les n premiers mots calcules comme reponses, par default = 10
+	 */
 	public Joueur(String pnom, Plateau plateau, De unDe, boolean lePass, int maxTry, boolean cos, int n) {
 		this.nom = pnom;
 		this.plateau = plateau;
@@ -36,21 +51,43 @@ public class Joueur {
 		this.n = n;
 	}
 	
-	//surcharge les constructeurs
+	/**
+	 * Surcharge le constructeur. Il construit le nom de joueur, le plateau qu'il se situe, le dé qu'il possède et l'option de passe;
+	 * par défaut, le nombre d'essai = 3, le nombre de mots pris en compte = 10
+	 * @param pnom le nom de joueur
+	 * @param plateau tous les joueurs jouent dans le meme plateau
+	 * @param unDe un dé qu'un joueur possède 
+	 * @param lePass si le joueur a l'option pour passer un mot (en total 5 passes seront autorisees)
+	 */
 	public Joueur(String pnom, Plateau plateau, De unDe, boolean lePass) {
 		this(pnom, plateau, unDe, lePass, 3, true, 10);
 	}	
 	
+	/**
+	 * Surcharge le constructeur. Il construit le nom de joueur, le plateau qu'il se situe, le dé qu'il possède;
+	 * par défaut, le nombre d'essai = 3, le nombre de mots pris en compte = 10, pas d'option passe
+	 * @param pnom le nom de joueur
+	 * @param plateau tous les joueurs jouent dans le meme plateau
+	 * @param unDe un dé qu'un joueur possède 
+	 */
 	public Joueur(String pnom, Plateau plateau, De unDe) {
 		this(pnom, plateau, unDe, false);
 	}
 	
+	/**
+	 * Surcharge le constructeur. Il construit le nom de joueur, le plateau qu'il se situe;
+	 * par défaut, le nombre d'essai = 3, le nombre de mots pris en compte = 10, pas d'option passe, dé normal
+	 * @param pnom le nom de joueur
+	 * @param plateau tous les joueurs jouent dans le meme plateau
+	 */
 	public Joueur(String pnom, Plateau plateau) {
 		this(pnom, plateau, new DeNormal());
 	}
 	
 	
-	//afficher les informations de joueur
+	/**
+	 * Afficher les informations de joueur 
+	 */
 	public String toString() {
 		int count = 0;
 		if (this.pass) count = 5;
@@ -58,12 +95,17 @@ public class Joueur {
 				this.countPass + "/" + count ;
 	}
 	
+	/**
+	 * Donner un dé
+	 * @param unDe
+	 */
 	public void giveDe(De unDe) {
 		this.de = unDe;
 	}
 
-	
-	//lancer de et avancer/rester
+	/**
+	 * Lancer le dé et avancer ou rester
+	 */
 	public void move() {
 		int moveTo = de.lancerDe();
 		System.out.println("Lancer dé ! De = " + moveTo);
@@ -81,7 +123,10 @@ public class Joueur {
 	}
 	
 	
-	//processus d'un tour pour deviner un mot (package les 4 methodes suivantes)
+	/**
+	 * Processus d'un tour pour deviner un mot
+	 * @throws WordNotFoundException
+	 */
 	public void guessWord() throws WordNotFoundException {
 		this.motAdeviner= motADeviner();	
 		boolean correcte = false;
@@ -112,16 +157,19 @@ public class Joueur {
 		if(nbGuess == this.nbTry+1) System.out.println("Oops... Vous n'avez plus d'essai.\nTour au joueur suivant !");
 	}
 	
-	
-	//methode qui fournit un mot et demande(print) le joueur a deviner
+	/**
+	 * Méthode qui fournit un mot et demander(print) le joueur à deviner
+	 * @return le mot à deviner
+	 */
 	public String motADeviner() {
 		System.out.println("\nMot à deviner est pret !");
 		return Utilityw2v.giveWord();
 	}
 	
-	
-	//methode qui lit la reponse de joueur et fournit 10 mots les plus similaires(print out)
-	//return un array de 10 mots
+	/**
+	 * Méthode qui lit la réponse de joueur et fournit 10 mots les plus similaires (print out) 
+	 * @return un array de 10 mots
+	 */
 	public ArrayList<String> reponses(){
 		//initialiser les 3 indices
 		String ind1 = null;
@@ -164,13 +212,20 @@ public class Joueur {
 		return topNmots;	
 	}
 	
-	
-	//methode qui indique si le mot est bien dans les reponses proposes
+	/**
+	 * Méthode qui indique si le mot à deviner est bien dans les réponses proposées
+	 * @param mot le mot à deviner
+	 * @param answers les n mots les plus proches des indices d'après le calcul
+	 * @return true si le mot à deviner est bien dans la liste; sinon false
+	 */
 	public boolean bingo(String mot, ArrayList<String> answers) {
 		return (answers.contains(mot));
 	}
 	
-	//methode qui demande le joueur avant chaque essai s'il veut passer ce tour
+	/**
+	 * Méthode qui demande le joueur avant chaque essai s'il veut passer ce tour 
+	 * @return true si le joueur veut passer ce mot; sinon false
+	 */
 	public boolean demandePass() {
 		String res = "";
 		do {
@@ -179,8 +234,6 @@ public class Joueur {
 		res = sc.next();
 		}while (!res.toLowerCase().equals("o") && !res.toLowerCase().equals("n"));
 		return (res.toLowerCase().equals("o"));
-	}
-	
-	
+	}	
 
 }
