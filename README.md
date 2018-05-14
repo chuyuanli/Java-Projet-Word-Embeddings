@@ -68,11 +68,13 @@ Bon jeu :D
 - Utilitaire :
 	- Utilityw2v : contient tous les méthodes pour calculer la similarité cosinus ou euclidienne
 
-- Interface :
-	- ValueComparator implements Comparator<T> : redéfinir la méthode compare en fonction de la similarité cosinus ou euclidienne
+- Classe :
+	- ValueComparator implements interface Comparator<T> : redéfinir la méthode compare en fonction de la similarité cosinus ou euclidienne
 
 3. Astuce de Pre-calcul des Normes :
-	 Pour rendre le déroulement plus fluide, avant le commencement du jeu, nous allons d'abord pre-calculer les normes pour chaque mot : sqrt(∑ a^2). C'est la raison pour laquelle vous allez voir deux lignes indiquant le processus du pre-calcul. Cela prendra quelques secondes, après avoir fini, le jeu commence !
+	- Pour rendre le déroulement plus fluide, avant le commencement du jeu, nous allons d'abord pre-calculer les normes pour chaque mot : sqrt(∑ a^2). C'est la raison pour laquelle vous allez voir deux lignes indiquant le processus du pre-calcul. Cela prendra quelques secondes, après avoir fini, le jeu commence !
+
+
 
 
 
