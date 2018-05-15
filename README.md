@@ -45,22 +45,24 @@ Bon jeu :D
 # ARCHITECTURE GÉNÉRALE DE L'IMPLÉMENTATION
 
 1. Projet Principal (Package_Greenson)
-	```
-	** Classes abstraites **
-		- Classe Case (3 classes d'enfants concrètes)
-			CaseMagi1
-			CaseMagi2
-			CaseNormale
-		- Classe Dé (2 classes d'enfants concrètes) :
-			DéMagi
-			DéNormal
 	
-
+	**Classes abstraites**
+	```
+	- Classe Case (3 classes d'enfants concrètes)
+		CaseMagi1
+		CaseMagi2
+		CaseNormale
+	- Classe Dé (2 classes d'enfants concrètes) :
+		DéMagi
+		DéNormal
+	```
+	
 	**Autres Classes**
-		- Joueur (décrire un joueur)
-		- Plateau (décrire un plateau qui génère des cases)
-		- Jeu (créer une partie de jeu)
-		- Lanceur (main, lancer un jeu)
+	```
+	- Joueur (décrire un joueur)
+	- Plateau (décrire un plateau qui génère des cases)
+	- Jeu (créer une partie de jeu)
+	- Lanceur (main, lancer un jeu)
 	```
 
 - Exception :
