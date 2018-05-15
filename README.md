@@ -49,41 +49,42 @@ Bon jeu :D
 **Classes abstraites**
 ```
 - Classe Case (3 classes d'enfants concrètes)
-- CaseMagi1
-- CaseMagi2
-- CaseNormale
+	- CaseMagi1
+	- CaseMagi2
+	- CaseNormale
 - Classe Dé (2 classes d'enfants concrètes) :
-- DéMagi
-- DéNormal
+	- DéMagi
+	- DéNormal
 ```
 
 **Autres Classes**
-	```
-	- Joueur (décrire un joueur)
-	- Plateau (décrire un plateau qui génère des cases)
-	- Jeu (créer une partie de jeu)
-	- Lanceur (main, lancer un jeu)
-	```
+```
+- Joueur (décrire un joueur)
+- Plateau (décrire un plateau qui génère des cases)
+- Jeu (créer une partie de jeu)
+- Lanceur (main, lancer un jeu)
+```
 
 **Exception**
-	```
-	- WordNotFoundException : pour générer l'exception quand l'utilisateur entre un mot inconnu dans le corpus; une exception héritée de Exception a été créée. Elle va afficher un message d'erreur et demander l'utilisateur entrer un autre mot. 
-	- Dans la plupart du temps, pour gérer le probleme de saisi, on a utilisé des boucles et pas l'exception pour que le programme redemande à l'utilisateur et pas s'arrêter.
-	```
+```
+- WordNotFoundException : pour générer l'exception quand l'utilisateur entre un mot inconnu dans le corpus; une exception héritée de Exception a été créée. Elle va afficher un message d'erreur et demander l'utilisateur entrer un autre mot. 
+- Dans la plupart du temps, pour gérer le probleme de saisi, on a utilisé des boucles et pas l'exception pour que le programme redemande à l'utilisateur et pas s'arrêter.
+```
 
 ## Partie Support (Package_word2vec)
 
 **Utilitaire**
-	`Utilityw2v : contient tous les méthodes pour calculer la similarité cosinus ou euclidienne`
+`Utilityw2v : contient tous les méthodes pour calculer la similarité cosinus ou euclidienne`
 
 **Comparator**
-	```
-	ValueComparator implements interface Comparator<T> : redéfinir la méthode compare() en fonction de la similarité cosinus ou euclidienne; cette classe est instanciée dans le méthode trierMap() et utilisé comme argument pour créer un nouveau TreeMap.
-	```
+```
+ValueComparator implements interface Comparator<T> : redéfinir la méthode compare() en fonction de la similarité cosinus ou euclidienne; cette classe est instanciée dans le méthode trierMap() et utilisé comme argument pour créer un nouveau TreeMap.
+```
 
 ## Astuce de Pre-calcul des Normes
-
-`Pour rendre le déroulement plus fluide, avant le commencement du jeu, nous allons d'abord pre-calculer les normes pour chaque mot : sqrt(∑ a^2). C'est la raison pour laquelle vous allez voir deux lignes indiquant le processus du pre-calcul. Cela prendra quelques secondes, après avoir fini, le jeu commence !`
+```
+Pour rendre le déroulement plus fluide, avant le commencement du jeu, nous allons d'abord pre-calculer les normes pour chaque mot : sqrt(∑ a^2). C'est la raison pour laquelle vous allez voir deux lignes indiquant le processus du pre-calcul. Cela prendra quelques secondes, après avoir fini, le jeu commence !
+```
 
 ## Hyper-Paramètres utilisés pour le calcul
 ```
@@ -97,10 +98,10 @@ Bon jeu :D
 	- en gros, cosinus est plus performant qu'euclidien
 
 ## Petit Jeu avec 
-`
+```
 - (fille - mère + fils) ~ père ?
 - 5 mots plus proche de cette formule : 
 {neveu=0.8559237477506132, frère=0.8475467175615804, père=0.8078790455060526, cousin=0.7956469454245549, épouse=0.793141769921414}
-`
+```
 
 
