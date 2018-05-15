@@ -50,12 +50,14 @@ Bon jeu :D
 
 `abstract classe Case`
 
-	`public class CaseMagi1 extends Case`
-	`public class CaseMagi2 extends Case`
-	`public class CaseNormale extends Case`
-- Classe Dé (2 classes d'enfants concrètes) :
-	- DéMagi
-	- DéNormal
+	- public class CaseMagi1 extends Case
+	- public class CaseMagi2 extends Case
+	- public class CaseNormale extends Case
+
+`abstract classe De`
+
+	- public class DeMagi extends De
+	- public class DeNormal extends De
 
 
 **Autres Classes**
