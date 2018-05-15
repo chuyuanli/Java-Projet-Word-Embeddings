@@ -46,7 +46,7 @@ Bon jeu :D
 
 1. Projet Principal (Package_Greenson)
 	```
-	**Classes abstraites**
+	** Classes abstraites **
 		- Classe Case (3 classes d'enfants concrètes)
 			CaseMagi1
 			CaseMagi2
@@ -91,26 +91,4 @@ Bon jeu :D
 	- 5 mots plus proche de cette formule : 
 	{neveu=0.8559237477506132, frère=0.8475467175615804, père=0.8078790455060526, cousin=0.7956469454245549, épouse=0.793141769921414}
 
-
-
-
-	 asdf
-	 asdf
-	 asdf 
-	 adf
-	 fadsf
-
-
-	asdf
-	asd
-	adsf
-
-
-	-adsf
-	-asdf
-	-asdf
-
-	- asdf
-	- asdf
-	- asd
 
