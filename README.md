@@ -66,24 +66,23 @@ Bon jeu :D
 ```
 
 **Exception**
-```
-- WordNotFoundException : 
-	pour générer l'exception quand l'utilisateur entre un mot inconnu dans le corpus; une exception héritée de Exception a été créée. Elle va afficher un message d'erreur et demander l'utilisateur entrer un autre mot. 
-```
-Dans la plupart du temps, pour gérer le probleme de saisi, on a utilisé des boucles et pas l'exception pour que le programme redemande à l'utilisateur et pas s'arrêter.
+
+`class WordNotFoundException extends Exception`
+- pour générer l'exception quand l'utilisateur entre un mot inconnu dans le corpus; une exception héritée de Exception a été créée. Elle va afficher un message d'erreur et demander l'utilisateur entrer un autre mot. 
+
+- Dans la plupart du temps, pour gérer le probleme de saisi, on a utilisé des boucles et pas l'exception pour que le programme redemande à l'utilisateur et pas s'arrêter.
 
 
 ## Partie Support (Package_word2vec)
 
 **Utilitaire**
-```
-Utilityw2v : contient tous les méthodes pour calculer la similarité cosinus ou euclidienne
-```
+`public class Utilityw2v`
+Contient tous les méthodes pour calculer la similarité cosinus ou euclidienne
+
 
 **Comparator**
-```
-ValueComparator implements interface Comparator<T> : redéfinir la méthode compare() en fonction de la similarité cosinus ou euclidienne; cette classe est instanciée dans le méthode trierMap() et utilisé comme argument pour créer un nouveau TreeMap.
-```
+`public class ValueComparator implements interface Comparator<T>`
+Redéfinir la méthode compare() en fonction de la similarité cosinus ou euclidienne; cette classe est instanciée dans le méthode trierMap() et utilisé comme argument pour créer un nouveau TreeMap.
 
 ## Astuce de Pre-calcul des Normes
 ```
