@@ -42,7 +42,7 @@ Ce jeu est un jeu de vocabulaire. Nous nous situons sur un plateau classique, av
 /!\ Veuillez bien vouloir suivre les instructions données par l'ordinateur, si votre saisie ne correspond pas à ce qu'on attend; l'ordinateur va vous redemander. 
 ```
 
-Bon jeu 
+Bon jeu :game_die:
 
 
 # ARCHITECTURE GÉNÉRALE DE L'IMPLÉMENTATION
