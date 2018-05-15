@@ -51,13 +51,13 @@ Bon jeu :game_die:
 	
 **Héritage et Classes Abstraites**
 
-`abstract classe Case`
+`abstract class Case`
 
 	- public class CaseMagi1 extends Case
 	- public class CaseMagi2 extends Case
 	- public class CaseNormale extends Case
 
-`abstract classe De`
+`abstract class De`
 
 	- public class DeMagi extends De
 	- public class DeNormal extends De
