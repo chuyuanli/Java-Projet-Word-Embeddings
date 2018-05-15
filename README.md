@@ -49,6 +49,7 @@ Bon jeu :D
 **Classes abstraites et Héritage**
 
 `abstract classe Case`
+
 	`public class CaseMagi1 extends Case`
 	`public class CaseMagi2 extends Case`
 	`public class CaseNormale extends Case`
