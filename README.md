@@ -3,7 +3,7 @@
 Au moment de lancer le jeu depuis le Terminal, il faut impérativement spécifier le chemin de votre fichier word2vec avec la commande suivante:
 `"w2v=<chemin>"`
 
-Vous pouvez configurer 7 options, en entrant en argument les commandes ci-dessous, séparées par UN espace. Dans chaque cas il est crucial de respecter exactement la graphie (minsucule/majuscule, espace/pas espace):
+Vous pouvez configurer 7 options, en entrant en argument les commandes ci-dessous, séparées par **un** espace. Dans chaque cas il est crucial de respecter exactement la graphie (minsucule/majuscule, espace/pas espace):
 ```
 - Nombre de joueurs: "nbJoueur=<n>" (/!\ Minimum 2)
 - Nombre d'essais: "nbTry=<n>" 
@@ -42,14 +42,14 @@ Ce jeu est un jeu de vocabulaire. Nous nous situons sur un plateau classique, av
 /!\ Veuillez bien vouloir suivre les instructions données par l'ordinateur, si votre saisie ne correspond pas à ce qu'on attend; l'ordinateur va vous redemander. 
 ```
 
-Bon jeu :D
+Bon jeu 
 
 
 # ARCHITECTURE GÉNÉRALE DE L'IMPLÉMENTATION
 
 ## Projet Principal (Package_Greenson)
 	
-**Classes abstraites et Héritage**
+**Héritage et Classes Abstraites**
 
 `abstract classe Case`
 
@@ -65,10 +65,10 @@ Bon jeu :D
 
 **Autres Classes**
 ```
-- Joueur (décrire un joueur)
-- Plateau (décrire un plateau qui génère des cases)
-- Jeu (créer une partie de jeu)
-- Lanceur (main, lancer un jeu)
+- public class Joueur {...} //décrire un joueur
+- public class Plateau {...} //décrire un plateau qui génère des cases
+- public class Jeu {...} //créer une partie de jeu
+- public class Lanceur {...} //main
 ```
 
 **Exception**
@@ -76,7 +76,7 @@ Bon jeu :D
 `class WordNotFoundException extends Exception`
 - pour générer l'exception quand l'utilisateur entre un mot inconnu dans le corpus; une exception héritée de Exception a été créée. Elle va afficher un message d'erreur et demander l'utilisateur entrer un autre mot. 
 
-- Dans la plupart du temps, pour gérer le probleme de saisi, on a utilisé des boucles et pas l'exception pour que le programme redemande à l'utilisateur et pas s'arrêter.
+- Dans la plupart du temps, pour gérer le probleme de saisi, on a utilisé des boucles et pas d'exception pour que le programme redemande à l'utilisateur et pas s'arrêter.
 
 
 ## Partie Support (Package_word2vec)
