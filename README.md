@@ -44,8 +44,7 @@ Bon jeu :D
 
 # ARCHITECTURE GÉNÉRALE DE L'IMPLÉMENTATION
 
-##Projet Principal (Package_Greenson)
---------------------------------------
+## Projet Principal (Package_Greenson)
 	
 	**Classes abstraites**
 	```
