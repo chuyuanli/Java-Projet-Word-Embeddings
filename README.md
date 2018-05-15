@@ -46,16 +46,16 @@ Bon jeu :D
 
 ## Projet Principal (Package_Greenson)
 	
-**Classes abstraites**
-```
-- Classe Case (3 classes d'enfants concrètes)
-	- CaseMagi1
-	- CaseMagi2
-	- CaseNormale
+**Classes abstraites et Héritage**
+
+`abstract classe Case`
+	`public class CaseMagi1 extends Case`
+	`public class CaseMagi2 extends Case`
+	`public class CaseNormale extends Case`
 - Classe Dé (2 classes d'enfants concrètes) :
 	- DéMagi
 	- DéNormal
-```
+
 
 **Autres Classes**
 ```
@@ -85,9 +85,9 @@ Contient tous les méthodes pour calculer la similarité cosinus ou euclidienne
 Redéfinir la méthode compare() en fonction de la similarité cosinus ou euclidienne; cette classe est instanciée dans le méthode trierMap() et utilisé comme argument pour créer un nouveau TreeMap.
 
 ## Astuce de Pre-calcul des Normes
-```
+
 Pour rendre le déroulement plus fluide, avant le commencement du jeu, nous allons d'abord pre-calculer les normes pour chaque mot : sqrt(∑ a^2). C'est la raison pour laquelle vous allez voir deux lignes indiquant le processus du pre-calcul. Cela prendra quelques secondes, après avoir fini, le jeu commence !
-```
+
 
 ## Hyper-Paramètres utilisés pour le calcul
 ```
