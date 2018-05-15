@@ -45,21 +45,23 @@ Bon jeu :D
 # ARCHITECTURE GÉNÉRALE DE L'IMPLÉMENTATION
 
 1. Projet Principal (Package_Greenson)
-
-	Classes abstraites : 
-		Classe Case (3 classes d'enfants concrètes) :
+	```
+	**Classes abstraites**
+		- Classe Case (3 classes d'enfants concrètes)
 			CaseMagi1
 			CaseMagi2
 			CaseNormale
-		Classe Dé (2 classes d'enfants concrètes) :
+		- Classe Dé (2 classes d'enfants concrètes) :
 			DéMagi
 			DéNormal
+	
 
-	Autres Classes :
-		Joueur (décrire un joueur)
-		Plateau (décrire un plateau qui génère des cases)
-		Jeu (créer une partie de jeu)
-		Lanceur (main, lancer un jeu)
+	**Autres Classes**
+		- Joueur (décrire un joueur)
+		- Plateau (décrire un plateau qui génère des cases)
+		- Jeu (créer une partie de jeu)
+		- Lanceur (main, lancer un jeu)
+	```
 
 - Exception :
 	- WordNotFoundException : pour générer l'exception quand l'utilisateur entre un mot inconnu dans le corpus; une exception héritée de Exception a été créée. Elle va afficher un message d'erreur et demander l'utilisateur entrer un autre mot. 
