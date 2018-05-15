@@ -44,7 +44,8 @@ Bon jeu :D
 
 # ARCHITECTURE GÉNÉRALE DE L'IMPLÉMENTATION
 
-1. Projet Principal (Package_Greenson)
+##Projet Principal (Package_Greenson)
+--------------------------------------
 	
 	**Classes abstraites**
 	```
@@ -56,7 +57,7 @@ Bon jeu :D
 		DéMagi
 		DéNormal
 	```
-	
+
 	**Autres Classes**
 	```
 	- Joueur (décrire un joueur)
@@ -65,9 +66,11 @@ Bon jeu :D
 	- Lanceur (main, lancer un jeu)
 	```
 
-- Exception :
+	**Exception**
+	```
 	- WordNotFoundException : pour générer l'exception quand l'utilisateur entre un mot inconnu dans le corpus; une exception héritée de Exception a été créée. Elle va afficher un message d'erreur et demander l'utilisateur entrer un autre mot. 
 	- Dans la plupart du temps, pour gérer le probleme de saisi, on a utilisé des boucles et pas l'exception pour que le programme redemande à l'utilisateur et pas s'arrêter.
+	```
 
 2. Partie Support (Package_word2vec)
 - Utilitaire :
