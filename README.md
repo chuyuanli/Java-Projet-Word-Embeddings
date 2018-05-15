@@ -67,14 +67,18 @@ Bon jeu :D
 
 **Exception**
 ```
-- WordNotFoundException : pour générer l'exception quand l'utilisateur entre un mot inconnu dans le corpus; une exception héritée de Exception a été créée. Elle va afficher un message d'erreur et demander l'utilisateur entrer un autre mot. 
-- Dans la plupart du temps, pour gérer le probleme de saisi, on a utilisé des boucles et pas l'exception pour que le programme redemande à l'utilisateur et pas s'arrêter.
+- WordNotFoundException : 
+	pour générer l'exception quand l'utilisateur entre un mot inconnu dans le corpus; une exception héritée de Exception a été créée. Elle va afficher un message d'erreur et demander l'utilisateur entrer un autre mot. 
 ```
+Dans la plupart du temps, pour gérer le probleme de saisi, on a utilisé des boucles et pas l'exception pour que le programme redemande à l'utilisateur et pas s'arrêter.
+
 
 ## Partie Support (Package_word2vec)
 
 **Utilitaire**
-`Utilityw2v : contient tous les méthodes pour calculer la similarité cosinus ou euclidienne`
+```
+Utilityw2v : contient tous les méthodes pour calculer la similarité cosinus ou euclidienne
+```
 
 **Comparator**
 ```
@@ -97,7 +101,7 @@ Pour rendre le déroulement plus fluide, avant le commencement du jeu, nous allo
 	- avec Eucldienne, le résultat change
 	- en gros, cosinus est plus performant qu'euclidien
 
-## Petit Jeu avec 
+## Petit Jeu avec w2v
 ```
 - (fille - mère + fils) ~ père ?
 - 5 mots plus proche de cette formule : 
