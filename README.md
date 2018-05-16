@@ -21,7 +21,7 @@ Le jeu peut alors commencer !
 
 # REGLES DU JEU:
 
-Ce jeu est un jeu de vocabulaire. Nous nous situons sur un plateau classique, avec des cases dont stockent des mots à deviner. Le but du jeu est d'arriver le premier à la dernière case ou de la dépasser.
+Ce jeu est un jeu de vocabulaire. Nous nous situons sur un plateau classique, avec des cases qui stockent des mots à deviner. Le but du jeu est d'arriver le premier à la dernière case ou de la dépasser.
 ```
 - Après avoir lancé le dé, vous devez faire deviner un mot généré aléatoirement.
 - Entrez 3 mots (indices) que vous pensez proches sémantiquement de ce dernier. 
@@ -35,7 +35,7 @@ Ce jeu est un jeu de vocabulaire. Nous nous situons sur un plateau classique, av
 
 **A Noter**
 ``` 
-/!\ Il existe des cases-piège placées aléatoirement sur le plateau. Trois d'entre elles font 'reculrer de 3 cases', les trois autres permettent de 'relancer le dé'.
+/!\ Il existe des cases-piège placées aléatoirement sur le plateau. Trois d'entre elles font 'reculer de 3 cases', les trois autres permettent de 'relancer le dé'.
    
 /!\ Il existe aussi un dé magique qui contient des faces numérotées de 0 à 5.
 
