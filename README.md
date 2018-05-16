@@ -74,25 +74,25 @@ Bon jeu :game_die:
 **Exception**
 
 `class WordNotFoundException extends Exception`
-- pour générer l'exception quand l'utilisateur entre un mot inconnu dans le corpus; une exception héritée de Exception a été créée. Elle va afficher un message d'erreur et demander l'utilisateur entrer un autre mot. 
+- pour générer l'exception quand l'utilisateur entre un mot inconnu dans le corpus; une exception qui hérite de Exception a été créée. Elle va afficher un message d'erreur et demander à l'utilisateur d'entrer un autre mot. 
 
-- Dans la plupart du temps, pour gérer le probleme de saisi, on a utilisé des boucles et pas d'exception pour que le programme redemande à l'utilisateur et pas s'arrêter.
+- La plupart du temps, pour gérer le probleme de saisie, on a utilisé des boucles et pas d'exception pour que le programme redemande à l'utilisateur au lieu de s'arrêter.
 
 
 ## Partie Support (Package_word2vec)
 
 **Utilitaire**
 `public class Utilityw2v`
-Contient tous les méthodes pour calculer la similarité cosinus ou euclidienne
+Contient toutes les méthodes pour calculer la similarité cosinus ou euclidienne
 
 
 **Comparator**
 `public class ValueComparator implements interface Comparator<T>`
-Redéfinir la méthode compare() en fonction de la similarité cosinus ou euclidienne; cette classe est instanciée dans le méthode trierMap() et utilisé comme argument pour créer un nouveau TreeMap.
+Redéfinir la méthode compare() en fonction de la similarité cosinus ou euclidienne; cette classe est instanciée dans le méthode trierMap() et utilisée comme argument pour créer un nouveau TreeMap.
 
 ## Astuce de Pre-calcul des Normes
 
-Pour rendre le déroulement plus fluide, avant le commencement du jeu, nous allons d'abord pre-calculer les normes pour chaque mot : sqrt(∑ a^2). C'est la raison pour laquelle vous allez voir deux lignes indiquant le processus du pre-calcul. Cela prendra quelques secondes, après avoir fini, le jeu commence !
+Pour rendre le déroulement plus fluide, avant le commencement du jeu, nous allons d'abord pre-calculer les normes pour chaque mot : sqrt(∑ a^2). C'est la raison pour laquelle vous allez voir deux lignes indiquant le processus du pre-calcul. Cela prendra quelques secondess. Après avoir fini, le jeu commence !
 
 
 ## Hyper-Paramètres utilisés pour le calcul
@@ -101,7 +101,7 @@ Pour rendre le déroulement plus fluide, avant le commencement du jeu, nous allo
 - Cosinus vs. Euclidienne
 ```
 
-- Avoir testé les différentes combinaisons de paramètres, le résultat est de suivant: 
+- Avoir testé les différentes combinaisons de paramètres, le résultat est le suivant: 
 	- avec Cosinus, la moyenne et la somme donnent le même résultat (tester l'angle)
 	- avec Eucldienne, le résultat change
 	- en gros, cosinus est plus performant qu'euclidien
